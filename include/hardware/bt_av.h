@@ -126,6 +126,34 @@ typedef struct {
     void (*audio_focus_status)( int is_enable );
 } btav_interface_t;
 
+typedef struct {
+
+    /** set to sizeof(btav_interface_t) */
+    size_t          size;
+    /**
+     * Register the BtAv callbacks
+     */
+    bt_status_t (*init)( btav_callbacks_t* callbacks );
+
+    /** connect to headset */
+    bt_status_t (*connect)( bt_bdaddr_t *bd_addr );
+
+    /** dis-connect from headset */
+    bt_status_t (*disconnect)( bt_bdaddr_t *bd_addr );
+
+    /** Closes the interface. */
+    void  (*cleanup)( void );
+
+    /* suspend stream for A2DP Sink */
+    void (*suspend_sink)( void );
+
+    /* resume stream for A2DP Sink */
+    void (*resume_sink)( void );
+
+    /* inform audio focus state */
+    void (*audio_focus_status)( int is_enable );
+} btav_sink_interface_t;
+
 __END_DECLS
 
 #endif /* ANDROID_INCLUDE_BT_AV_H */
